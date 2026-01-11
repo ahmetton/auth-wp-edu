@@ -25,28 +25,28 @@ export default function ResetRequest() {
       if (response.ok) {
         setMessage(data.message)
         if (data.tokenLogged) {
-          setMessage(data.message + ' (Check server console for the reset link)')
+          setMessage(data.message + ' (تحقق من سجل الخادم للعثور على رابط إعادة التعيين)')
         }
         setEmail('')
       } else {
-        setError(data.message || 'An error occurred')
+        setError(data.message || 'حدث خطأ')
       }
     } catch (err) {
-      setError('An error occurred. Please try again.')
+      setError('حدث خطأ. الرجاء المحاولة مرة أخرى.')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
+    <div dir="rtl" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl text-right">
         <div>
           <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
-            Reset your password
+            إعادة تعيين كلمة المرور
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Enter your email address and we'll send you a link to reset your password.
+            أدخل عنوان البريد الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export default function ResetRequest() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
+              البريد الإلكتروني
             </label>
             <input
               id="email"
@@ -74,7 +74,7 @@ export default function ResetRequest() {
               autoComplete="email"
               required
               className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter your email"
+              placeholder="أدخل بريدك الإلكتروني"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -86,13 +86,13 @@ export default function ResetRequest() {
               disabled={loading}
               className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed transition"
             >
-              {loading ? 'Sending...' : 'Send reset link'}
+              {loading ? 'جاري الإرسال...' : 'إرسال رابط إعادة التعيين'}
             </button>
           </div>
 
           <div className="text-center">
             <Link href="/auth/signin" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-              Back to sign in
+              العودة إلى تسجيل الدخول
             </Link>
           </div>
         </form>
