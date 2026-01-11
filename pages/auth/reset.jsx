@@ -54,8 +54,8 @@ export default function ResetPassword() {
 
   if (!token) {
     return (
-      <div dir="rtl" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
-        <div className="max-w-md w-full bg-white p-10 rounded-2xl shadow-xl text-right">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
+        <div className="max-w-md w-full bg-white p-10 rounded-2xl shadow-xl text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">رابط إعادة التعيين غير صالح</h2>
           <p className="text-gray-600 mb-6">هذا الرابط لإعادة تعيين كلمة المرور غير صالح أو منتهي الصلاحية.</p>
           <Link href="/auth/reset-request" className="text-indigo-600 hover:text-indigo-500 font-medium">
@@ -67,8 +67,8 @@ export default function ResetPassword() {
   }
 
   return (
-    <div dir="rtl" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl text-right">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
         <div>
           <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
             تعيين كلمة مرور جديدة
