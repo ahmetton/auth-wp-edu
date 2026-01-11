@@ -1,87 +1,13 @@
-# ahmetton/new Repository
+README - auth-wp-edu (مُعد للاستخدام لتطبيق المصادقة)
 
-This repository contains a WordPress LMS plugin/theme and a standalone authentication system with automatic integration.
+هذا المستودع الآن مخصّص لتطبيق المصادقة (auth-app). تمّت إزالة أو تفريغ المحتوى غير المتعلق لتقليل الالتباس وتحضير المستودع ليحتوي فقط على ملفات التطبيق.
 
-## Contents
+ما الذي تمّ فعله:
+- تمّت إعادة كتابة ملفات الدليل لاستبدال المحتويات القديمة بملاحظات تفيد أن القالب والإضافة يجب أن يكونا في مستودعات منفصلة.
+- إن أردت، أستطيع إنشاء مستودعين جديدين باسم "wp-edu-theme" و"wp-edu-lms" لنقل القالب والإضافة إليهما أو تزويدك بملفات ZIP جاهزة للتحميل والرفع عبر FTP.
 
-### 📁 v/ - WordPress LMS System
-Contains WordPress plugin and theme for educational/LMS functionality:
-- `الإضافة/` - WordPress plugin for LMS features (includes Next.js integration)
-- `القالب/` - WordPress theme
+خطوات مقترحة التالية (بسيطة):
+1) إن كنت تريد استخدام هذا المستودع لتطبيق المصادقة (auth-app) فقط: ادفع شفرة auth-app هنا أو اربط هذا المستودع مع Vercel لنشر التطبيق.
+2) لإنشاء مستودعات منفصلة للقالب والإضافة: أخبرني وسأنشئها لك أو أجهّز ZIP جاهزاً.
 
-### 🔐 auth-app/ - Professional Authentication System
-A modern, secure authentication system built with Next.js and NextAuth.js.
-
-**Features:**
-- Email or Phone login
-- Social authentication (Google, Facebook)
-- Password reset functionality
-- User registration
-- Remember me option
-- Professional responsive UI
-
-**[→ View Full Documentation](./auth-app/README.md)**
-
-## 🔗 WordPress Integration
-
-The authentication system is **automatically integrated** with WordPress. When users click registration links in WordPress, they are redirected to the professional Next.js authentication page.
-
-**[→ Integration Guide (Arabic)](./INTEGRATION_GUIDE_AR.md)**
-
-### Quick Setup for Integration:
-
-1. **Start the auth app:**
-```bash
-cd auth-app
-npm install
-npm run prisma:push
-npm run dev
-```
-
-2. **Configure WordPress:**
-Edit `/v/الإضافة/includes/nextjs-auth-integration.php` line 13:
-```php
-define( 'WPEDU_AUTH_APP_URL', 'http://localhost:3000' );
-```
-
-3. **Test:** Click any registration link in WordPress - you'll be redirected to the professional auth page!
-
-## Quick Start - Authentication System
-
-```bash
-cd auth-app
-npm install
-npm run prisma:push
-npm run dev
-```
-
-Visit http://localhost:3000 to see the authentication system.
-
-For detailed setup instructions, OAuth configuration, and SMTP setup, see the [auth-app README](./auth-app/README.md).
-
-## Repository Structure
-
-```
-.
-├── v/                                # WordPress content
-│   ├── الإضافة/                     # WordPress plugin
-│   │   └── includes/
-│   │       └── nextjs-auth-integration.php  # Integration file
-│   └── القالب/                      # WordPress theme
-├── auth-app/                         # Authentication system
-│   ├── pages/                       # Next.js pages
-│   ├── components/                  # React components
-│   ├── lib/                        # Utilities
-│   ├── prisma/                     # Database schema
-│   └── README.md                   # Detailed docs
-├── INTEGRATION_GUIDE_AR.md         # Integration guide (Arabic)
-└── README.md                       # This file
-```
-
-## Contributing
-
-Please ensure any contributions maintain the security and quality standards of the project.
-
-## License
-
-See individual component licenses.
+تاريخ التعديل: 2026-01-11
