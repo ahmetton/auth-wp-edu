@@ -27,13 +27,11 @@ coverage/
 .vercel
 
 # Next.js
-.next/
 next-env.d.ts
 
 # Prisma
 *.db
 *.db-journal
-migrations/
 
 # OS files
 .DS_Store
