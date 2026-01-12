@@ -224,15 +224,28 @@ npm run prisma:push
 
 ## Production Deployment
 
+For detailed deployment instructions to Vercel or other platforms, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+### Quick Start for Vercel
+
+1. Push your code to GitHub
+2. Import repository in Vercel
+3. Add environment variables (see `.env.example`)
+4. Deploy!
+
+The build script automatically runs `prisma generate` during deployment.
+
 ### Environment Variables
 
 Set these in your production environment:
 
-1. Generate new `NEXTAUTH_SECRET`
+1. Generate new `NEXTAUTH_SECRET` with `openssl rand -base64 32`
 2. Set `NEXTAUTH_URL` to your production URL
-3. Configure production database URL (PostgreSQL, MySQL, etc.)
+3. Configure production database URL (PostgreSQL recommended)
 4. Set up OAuth credentials for production redirect URIs
 5. Configure production SMTP settings
+
+See `.env.example` for complete list of required and optional variables.
 
 ### Database
 
@@ -253,11 +266,20 @@ npx prisma migrate dev --name init
 
 ## Troubleshooting
 
+### Prisma Client Initialization Error
+
+If you see `PrismaClientInitializationError` during deployment:
+
+- The build script now includes `prisma generate` automatically
+- Ensure `package.json` has: `"build": "prisma generate && next build"`
+- Redeploy the application after updating the build script
+
 ### OAuth Not Working
 
 - Verify redirect URIs match exactly in provider console
 - Check CLIENT_ID and CLIENT_SECRET are correct
 - Ensure the OAuth provider is enabled
+- If not using OAuth, leave the environment variables empty (the app will automatically hide those buttons)
 
 ### Email Not Sending
 
@@ -269,6 +291,15 @@ npx prisma migrate dev --name init
 
 - Delete `prisma/dev.db` and run `npm run prisma:push` again
 - Check DATABASE_URL format is correct
+
+### Vercel Deployment Issues
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed troubleshooting of:
+- Prisma Client initialization
+- OAuth provider configuration
+- Database connection issues
+- Domain/DNS configuration
+- 405 Method Not Allowed errors
 
 ## Integration with Existing Projects
 
