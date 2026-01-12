@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTranslation, LanguageSwitcher } from '../../lib/translations'
 
 export default function ResetRequest() {
+  const { t, dir } = useTranslation()
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
@@ -25,78 +27,81 @@ export default function ResetRequest() {
       if (response.ok) {
         setMessage(data.message)
         if (data.tokenLogged) {
-          setMessage(data.message + ' (تحقق من سجل الخادم للعثور على رابط إعادة التعيين)')
+          setMessage(data.message + ' (' + t.checkYourEmailDesc + ')')
         }
         setEmail('')
       } else {
-        setError(data.message || 'حدث خطأ')
+        setError(data.message || t.errorOccurred)
       }
     } catch (err) {
-      setError('حدث خطأ. الرجاء المحاولة مرة أخرى.')
+      setError(t.errorOccurred)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div dir="rtl" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl text-right">
-        <div>
-          <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
-            إعادة تعيين كلمة المرور
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            أدخل عنوان البريد الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.
-          </p>
+    <>
+      <LanguageSwitcher />
+      <div dir={dir} className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl" style={{ textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+          <div>
+            <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900">
+              {t.resetPasswordTitle}
+            </h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              {t.resetPasswordDesc}
+            </p>
+          </div>
+
+          {message && (
+            <div className="rounded-md bg-green-50 p-4">
+              <p className="text-sm text-green-800">{message}</p>
+            </div>
+          )}
+
+          {error && (
+            <div className="rounded-md bg-red-50 p-4">
+              <p className="text-sm text-red-800">{error}</p>
+            </div>
+          )}
+
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                {t.email}
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder={t.email}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed transition"
+              >
+                {loading ? t.sending : t.sendResetLink}
+              </button>
+            </div>
+
+            <div className="text-center">
+              <Link href="/auth/signin" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                {t.backToSignIn}
+              </Link>
+            </div>
+          </form>
         </div>
-
-        {message && (
-          <div className="rounded-md bg-green-50 p-4">
-            <p className="text-sm text-green-800">{message}</p>
-          </div>
-        )}
-
-        {error && (
-          <div className="rounded-md bg-red-50 p-4">
-            <p className="text-sm text-red-800">{error}</p>
-          </div>
-        )}
-
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              البريد الإلكتروني
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="أدخل بريدك الإلكتروني"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed transition"
-            >
-              {loading ? 'جاري الإرسال...' : 'إرسال رابط إعادة التعيين'}
-            </button>
-          </div>
-
-          <div className="text-center">
-            <Link href="/auth/signin" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-              العودة إلى تسجيل الدخول
-            </Link>
-          </div>
-        </form>
       </div>
-    </div>
+    </>
   )
 }

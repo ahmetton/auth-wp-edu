@@ -1,8 +1,15 @@
+import { useTranslation, LanguageSwitcher } from '../../lib/translations'
+
 export default function ErrorPage() {
+  const { t, dir } = useTranslation()
+  
   return (
-    <div style={{ maxWidth: 480, margin: '2rem auto', direction: 'rtl', textAlign: 'right' }}>
-      <h2>حدث خطأ أثناء تسجيل الدخول</h2>
-      <p>وقعت مشكلة أثناء محاولة الدخول. الرجاء المحاولة مرة أخرى أو التواصل مع الدعم.</p>
-    </div>
+    <>
+      <LanguageSwitcher />
+      <div style={{ maxWidth: 480, margin: '2rem auto', direction: dir, textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+        <h2>{t.errorOccurred}</h2>
+        <p>{t.errorOccurredDesc}</p>
+      </div>
+    </>
   )
 }
