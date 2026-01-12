@@ -128,11 +128,13 @@ Required DNS records:
 ```
 Type: A
 Name: @
-Value: 76.76.21.21  (Vercel's IP - check Vercel dashboard for current IP)
+Value: [See Vercel Dashboard → Domains for current IP address]
 TTL: 300
 ```
 
-**Option B: Using CNAME**
+**Note:** Vercel's IP addresses may change. Always check your Vercel project's domain settings for the current IP address.
+
+**Option B: Using CNAME (Alternative)**
 ```
 Type: CNAME
 Name: @
