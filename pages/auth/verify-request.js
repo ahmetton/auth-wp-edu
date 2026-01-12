@@ -1,8 +1,15 @@
+import { useTranslation, LanguageSwitcher } from '../../lib/translations'
+
 export default function VerifyRequest() {
+  const { t, dir } = useTranslation()
+  
   return (
-    <div style={{ maxWidth: 480, margin: '2rem auto', direction: 'rtl', textAlign: 'right' }}>
-      <h2>تحقق من بريدك</h2>
-      <p>أرسلنا رابط تسجيل الدخول إلى بريدك الإلكتروني. الرجاء التحقق من صندوق الوارد أو صندوق الرسائل غير المرغوب فيها.</p>
-    </div>
+    <>
+      <LanguageSwitcher />
+      <div style={{ maxWidth: 480, margin: '2rem auto', direction: dir, textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+        <h2>{t.checkYourEmail}</h2>
+        <p>{t.checkYourEmailDesc}</p>
+      </div>
+    </>
   )
 }
